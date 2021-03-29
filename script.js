@@ -1,25 +1,38 @@
-let gridContainer = document.getElementById("grid-container");
+const gridContainer = document.getElementById("grid-container");
 
-// function that generates the number of rows and columns in a grid
-function createGrid(number) {
-  if (!number || number > 100 || number < 16)
-    alert("Please return a number from 16 to 100");
-  else
-    gridContainer.style.cssText = `grid-template-columns: repeat(${number}, 1fr); grid-template-rows: repeat(${number}, 1fr)`;
+// Genetare number of rows and columns for grid
+function createGrid(number, color = "black") {
+  gridContainer.style.cssText = `grid-template-columns: repeat(${number}, 1fr); grid-template-rows: repeat(${number}, 1fr)`;
   // create the divs inside the grid
   for (let i = 1; i <= number ** 2; i++) {
-    let gridItem = document.createElement("div");
+    const gridItem = document.createElement("div");
     gridContainer.append(gridItem);
-    // gridItem.style.cssText = "border: 1px solid black;";
+    // gridItem.style.border = "1px solid rgba(225,225,225, .3)";
     gridItem.addEventListener(
       "mouseover",
-      (e) => (gridItem.style.backgroundColor = generateRandomColor())
+      () => (gridItem.style.backgroundColor = generateRandomColor())
+    );
+    // Clear grid
+    const clearGrid = document.getElementById("clear-grid");
+    clearGrid.addEventListener(
+      "click",
+      () => (gridItem.style.backgroundColor = "white")
     );
   }
 }
 
+//Change grid
+const slider = document.getElementById("slider");
+const displayNumberGrid = document.getElementById("displayNumberGrid");
+
+displayNumberGrid.textContent = slider.value;
+slider.oninput = () => (displayNumberGrid.textContent = slider.value);
+
+slider.addEventListener("click", () => createGrid(slider.value));
+
+// Hex generator for colors
 function generateRandomColor() {
-  let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+  const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
   return randomColor;
 }
 

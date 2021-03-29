@@ -8,7 +8,23 @@
     <title>Etch-a-sketch</title>
   </head>
   <body>
-    <button>Change grid</button>
+    <div class="header-container">
+      <header>
+        <h1>Etch-a-sketch</h1>
+      </header>
+    </div>
+    <div class="btns-container">
+      <button class="clear-btn" id="clear-grid">Clear</button>
+      <input
+        type="range"
+        min="16"
+        max="100"
+        value="16"
+        class="slider"
+        id="slider"
+      />
+      <p id="displayNumberGrid"></p>
+    </div>
     <div class="container main-container" id="main-container">
       <div class="container grid-container" id="grid-container"></div>
     </div>
